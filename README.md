@@ -1,7 +1,7 @@
 
 # Memory Game
 
-It is a simple memory game designed using HTML, CSS, JS wihe sublime text editor      | Ejoy :')
+It is a simple memory game designed using HTML, CSS, JS wihe sublime text editor | Ejoy :")
 ### What it include
 
   -  Counter 

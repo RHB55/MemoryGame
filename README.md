@@ -1,7 +1,7 @@
 
 # Memory Game
 
-It is a simple game designed using HTML, CSS, JS
+It is a simple memory game designed using HTML, CSS, JS |Ejoy ")
 ### What it include
 
   -  Counter 

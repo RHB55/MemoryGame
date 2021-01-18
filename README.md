@@ -10,7 +10,7 @@ It is a simple memory game designed using HTML, CSS, JS wihe sublime text editor
   - Number of transfers
   - Pop-up window "Congratulations"
 
-# How to play!
+## How to play!
 
   - Depend on memory
   - There are two similar images within the boxes arranged randomly

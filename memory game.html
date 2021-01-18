@@ -1,0 +1,629 @@
+<html lang="en"><head>
+ 
+  <meta charset="utf-8">
+  <title>Memory Game</title>
+ 
+  <meta name="description" content="">
+
+  <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+    <header>
+         <img src="Udacity_logo 2.png">
+        </header>
+
+<div class="container">
+  <header>
+    <h1>Memory Game</h1>
+  </header>
+
+  <section class="score-panel">
+
+   
+  	<ul class="stars">
+  		<li><i class="fa fa-star" id="first-star"></i></li>
+  		<li><i class="fa fa-star" id="second-star"></i></li>
+  		<li><i class="fa fa-star" id="third-star"></i></li>
+  	</ul>
+
+  
+    <span class="moves">0</span> <p class="moves_text">Moves</p>
+
+    <div class="restart">
+  		<i class="fa fa-repeat"></i>
+  	</div>
+
+   
+    <div class="timer_container">
+  		<ul class="timer">
+        <li class="hours" style="visibility: hidden;">0</li>
+        <li class="colon_one" style="visibility: hidden;">:</li>
+        <li class="minutes" style="visibility: hidden;">0</li>
+        <li class="colon_two" style="visibility: hidden;">:</li>
+        <li class="seconds">0s</li>
+      </ul>
+  	</div>
+
+    
+    <div class="modal">
+      <div class="modal_content">
+        <p class="congratulatory_message">Congratulations, you won!</p>
+        <p class="performance_rating"></p>
+        <p class="time_taken"></p>
+        <p class="moves_taken"></p>
+
+        <div class="play_again_button_container">
+          <button class="play_again_button">Play again</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <ul class="deck">
+    <li class="card">
+      <i class="fa fa-anchor" id="card_1"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-bomb" id="card_2"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-leaf" id="card_3"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-paper-plane-o" id="card_4"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-bomb" id="card_5"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-bolt" id="card_6"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-bicycle" id="card_7"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-bicycle" id="card_8"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-diamond" id="card_9"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-cube" id="card_10"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-diamond" id="card_11"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-bolt" id="card_12"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-paper-plane-o" id="card_13"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-anchor" id="card_14"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-leaf" id="card_15"></i>
+    </li>
+    <li class="card">
+      <i class="fa fa-cube" id="card_16"></i>
+    </li>
+  </ul>
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<style>
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+  background: url('e6hbfP.jpg');
+  font-family: 'Coda', cursive;
+}
+
+
+    img{
+    height:190px;
+    width:190px;
+    margin-left:auto;
+     margin-right:auto;
+    display:block;
+    }
+    
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+
+
+ .score-panel {
+     text-align: left;
+     width: 400px;
+     margin-bottom: 10px;
+ }
+
+ .score-panel .stars {
+     margin: 0;
+     padding: 0;
+     display: inline-block;
+     margin: 0 10px 0 0;
+ }
+
+
+ .score-panel .stars li {
+   list-style: none;
+   display: inline-block;
+}
+
+.timer_container li {
+  list-style: none;
+  display: inline-block;
+}
+
+
+.score-panel .restart {
+    float: right;
+    cursor: pointer;
+    display: inline;
+}
+
+.moves_text {
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
+.timer_container {
+  float: right;
+  margin-right: 10px;
+}
+
+.timer {
+  display: inline;
+}
+
+.colon_one {
+  visibility: hidden;
+}
+
+.minutes {
+  visibility: hidden;
+}
+
+.colon_two {
+  visibility: hidden;
+}
+
+.hours {
+  visibility: hidden;
+}
+
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: #ffffff;
+}
+
+  
+.modal_content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding-left: 25%;
+    padding-right: 25%;
+    border: 1px solid #888;
+    width: 80%; 
+}
+
+.modal_content .congratulatory_message {
+    text-align: center;
+    font-weight: bold;
+    font-size: 32px;
+  }
+
+.modal_content p {
+    text-align: left;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.play_again_button {
+    background-color: #00B9A9;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    font-family: 'Open Sans', sans-serif;;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.play_again_button:hover,
+.play_again_button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.play_again_button_container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+
+.deck {
+   width: 660px;
+   min-height: 680px;
+   background: url('e6hbfP.jpg');
+   padding: 32px;
+   border-radius: 10px;
+   box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   align-items: center;
+   margin: 0 0 3em;
+}
+
+.deck .card {
+   height: 125px;
+   width: 125px;
+   background:#eeccff;
+  
+   font-size: 0px;
+   color: #ffffff;
+   border-radius: 8px;
+   cursor: pointer;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card.open {
+   transform: rotateY(0);
+   background: #02b3e4;
+   cursor: default;
+   font-size: 33px;
+}
+
+.deck .card.match {
+   cursor: default;
+   background: #02ccba;
+   font-size: 33px;
+}
+
+.deck .card.not-a-match {
+   cursor: default;
+   background: #ff7256;
+   font-size: 33px;
+}
+
+.deck .card:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+</style>
+<script>
+$(document).ready(function() {
+
+
+var moves_taken = 0;
+var first_move = 0;
+var second_move = 1;
+var total_moves_per_turn = 2;
+
+var card_pairs_matched = 0;
+var total_card_pairs = 8;
+
+var moves_counter = 0;
+var performance_rating = "3 stars";
+
+var hours = 1;
+var minutes = 1;
+var seconds = 1;
+var timer_start = false;
+var game_timer;
+
+var modal_element = $('.modal');
+
+var performance_rating_element = $('.performance_rating');
+var time_taken_element = $('.time_taken');
+var moves_taken_element = $('.moves_taken');
+
+var performance_rating_string = "Performance rating: ";
+var time_taken_string = "Time taken: ";
+var moves_taken_string = "Moves taken: ";
+
+
+
+   var card_deck = [
+    "fa fa-diamond",
+    "fa fa-paper-plane-o",
+    "fa fa-anchor",
+    "fa fa-bolt",
+    "fa fa-cube",
+    "fa fa-anchor",
+    "fa fa-leaf",
+    "fa fa-bicycle",
+    "fa fa-diamond",
+    "fa fa-bomb",
+    "fa fa-leaf",
+    "fa fa-bomb",
+    "fa fa-bolt",
+    "fa fa-bicycle",
+    "fa fa-paper-plane-o",
+    "fa fa-cube"];
+
+    
+
+    $('.card').click(function() {
+     
+      if(moves_taken === first_move) {
+        $(this).addClass('open');
+       
+        first_card = $(this);
+        first_card_type = $(this).find('i').attr('class');
+ 
+        moves_taken = moves_taken + 1;
+      }
+     
+      else if (moves_taken === second_move) {
+        $(this).addClass('open');
+       
+        second_card = $(this);
+        second_card_type = $(this).find('i').attr('class');
+ 
+        if (first_card_type === second_card_type) {
+          cardMatchSuccess(first_card, second_card);
+          
+          if (card_pairs_matched === total_card_pairs) {
+            gameCompleted();
+          };
+        } else if (first_card_type !== second_card_type) {
+          cardMatchFail(first_card, second_card);
+        };
+        
+        moves_taken = 0;
+      };
+    });
+
+ 
+    function cardMatchSuccess(first_card, second_card) {
+      first_card.addClass('match');
+      second_card.addClass('match');
+      card_pairs_matched = card_pairs_matched + 1;
+      moves_counter = moves_counter + 1;
+      moveCounter(moves_counter);
+    }
+
+    function cardMatchFail(first_card, second_card) {
+      first_card.addClass('not-a-match');
+      second_card.addClass('not-a-match');
+      moves_counter = moves_counter + 1;
+    
+      flipCards(first_card, second_card);
+      moveCounter(moves_counter);
+    }
+
+   
+    function flipCards(first_card, second_card) {
+      setTimeout(function(){
+            first_card.removeClass('not-a-match open');
+            second_card.removeClass('not-a-match open');
+      },1000);
+    };
+
+   
+    function moveCounter(moves_counter){
+      
+      if(moves_counter > 1) {
+        $('.score-panel').find('.moves').text(moves_counter);
+        $('.moves_text').text("Moves");
+      } else if (moves_counter === 1) {
+        $('.score-panel').find('.moves').text(moves_counter);
+        $('.moves_text').text("Move");
+      };
+
+      if (moves_counter === 20) {
+        $('#first-star').removeClass('fa-star').addClass('fa-star-o');
+        performance_rating = "2 stars";
+      } else if (moves_counter === 30) {
+        $('#second-star').removeClass('fa-star').addClass('fa-star-o');
+        performance_rating = "1 star";
+      } else if (moves_counter === 40) {
+        $('#third-star').removeClass('fa-star').addClass('fa-star-o');
+        performance_rating = "0 stars";
+      }
+    };
+
+  
+    function gameCompleted() {
+     
+      clearInterval(game_timer);
+      timer_start = false;
+    
+      modal_element.css('display', 'block');
+      
+      performance_rating_element.text(performance_rating_string + performance_rating);
+      time_taken_element.text(time_taken_string + $('.hours').text() +
+       $('.colon_one').text() +
+       $('.minutes').text() +
+       $('.colon_two').text() +
+       $('.seconds').text());
+      moves_taken_element.text(moves_taken_string + moves_counter);
+
+    
+      $('.play_again_button').click(function() {
+        restartGame();
+        modal_element.css('display', 'none');
+      });
+
+    };
+
+ 
+
+    $('.card').click(function() {
+      if (timer_start === false) {
+        timer();
+      
+        timer_start = true;
+      }
+    });
+
+    function timer() {
+      game_timer = setInterval(function() {
+         
+          if(seconds < 60) {
+            $('.seconds').text(seconds + "s");
+            seconds = seconds + 1;
+          }
+          
+          else if (seconds === 60) {
+            $('.minutes').css('visibility', 'visible');
+            $('.colon_two').css('visibility', 'visible');
+            seconds = 0;
+            $('.seconds').text(seconds + "s");
+            $('.minutes').text(minutes + "m");
+            minutes = minutes + 1;
+            seconds = seconds + 1;
+
+          
+            if (minutes === 60) {
+              $('.hours').css('visibility', 'visible');
+              $('.colon_one').css('visibility', 'visible');
+              seconds = 0;
+              minutes = 0;
+              $('.seconds').text(seconds + "s");
+              $('.minutes').text(minutes + "m");
+              $('.hours').text(hours + "hr");
+              hours = hours + 1;
+              minutes = minutes + 1;
+              seconds = seconds + 1;
+              };
+          };
+        }, 1000);
+    };
+
+  
+    $('.restart').click(function() {
+      restartGame();
+    });
+
+ 
+    function restartGame() {
+     
+      $('.card').removeClass('open match');
+      moves_taken = 0;
+      card_pairs_matched = 0;
+      performance_rating = "3 stars";
+
+     
+      clearInterval(game_timer);
+      seconds = 0;
+      minutes = 0;
+      hours = 0;
+      $('.colon_one').css('visibility', 'hidden');
+      $('.minutes').css('visibility', 'hidden');
+      $('.colon_two').css('visibility', 'hidden');
+      $('.hours').css('visibility', 'hidden');
+      $('.seconds').text(seconds + "s");
+      $('.minutes').text(minutes);
+      $('.hours').text(hours);
+      timer_start = false;
+
+   
+      moves_counter = 0;
+      $('.score-panel').find('.moves').text(moves_counter);
+
+  
+      $('#first-star').removeClass('fa-star-o').addClass('fa-star');
+      $('#second-star').removeClass('fa-star-o').addClass('fa-star');
+      $('#third-star').removeClass('fa-star-o').addClass('fa-star');
+
+    
+      shuffle(card_deck);
+      var shuffled_deck = card_deck;
+
+
+      $('#card_1').removeClass().addClass(shuffled_deck[0]);
+      $('#card_2').removeClass().addClass(shuffled_deck[1]);
+      $('#card_3').removeClass().addClass(shuffled_deck[2]);
+      $('#card_4').removeClass().addClass(shuffled_deck[3]);
+      $('#card_5').removeClass().addClass(shuffled_deck[4]);
+      $('#card_6').removeClass().addClass(shuffled_deck[5]);
+      $('#card_7').removeClass().addClass(shuffled_deck[6]);
+      $('#card_8').removeClass().addClass(shuffled_deck[7]);
+      $('#card_9').removeClass().addClass(shuffled_deck[8]);
+      $('#card_10').removeClass().addClass(shuffled_deck[9]);
+      $('#card_11').removeClass().addClass(shuffled_deck[10]);
+      $('#card_12').removeClass().addClass(shuffled_deck[11]);
+      $('#card_13').removeClass().addClass(shuffled_deck[12]);
+      $('#card_14').removeClass().addClass(shuffled_deck[13]);
+      $('#card_15').removeClass().addClass(shuffled_deck[14]);
+      $('#card_16').removeClass().addClass(shuffled_deck[15]);
+
+      };
+
+
+  function shuffle(array) {
+
+
+      var currentIndex = array.length, temporaryValue, randomIndex;
+
+      while (currentIndex !== 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+      }
+
+      return array;
+  }
+
+});
+
+</script>
+
+
+
+</body></html>
